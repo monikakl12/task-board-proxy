@@ -1,0 +1,34 @@
+
+
+server:
+  port: 8080 # The proxy server port
+
+spring:
+  application:
+    name: task-board
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - "http://localhost:4200" # Change this if your frontend runs on a different port/URL
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+             - "*"
+            allowCredentials: true
+      routes:
+        - id: task-manager
+          uri: http://localhost:8081 # Replace 8081 with the port your BE runs on
+          predicates:
+            - Path=/api/v1/tasks/** # Intercepts any request starting with /api/
+  logging:
+    level:
+      org.springframework.cloud.gateway: DEBUG
+      org.springframework.http.server.reactive: DEBUG
+      reactor.netty.http.client: DEBUG
