@@ -24,7 +24,7 @@ spring:
             allowCredentials: true
       routes:
         - id: task-manager
-          uri: http://localhost:8081 # Replace 8081 with the port your BE runs on
+          uri: http://task-api:8081 # Replace 8081 with the port your BE runs on
           predicates:
             - Path=/api/v1/tasks/** # Intercepts any request starting with /api/
   logging:
